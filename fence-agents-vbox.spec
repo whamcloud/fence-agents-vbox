@@ -13,9 +13,9 @@
 Name: fence-agents-vbox
 Summary: Fence agent for VirtualBox
 Requires: openssh-clients
-Requires: fence-agents-common
+Requires: fence-agents-common >= 4.2.1
 Version: 4.0.24
-Release: 4%{?alphatag:.%{alphatag}}%{?dist}
+Release: 5%{?alphatag:.%{alphatag}}%{?dist}
 License: GPLv2+ and LGPLv2+
 Group: System Environment/Base
 URL: http://sourceware.org/cluster/wiki/
@@ -67,6 +67,9 @@ rm -rf %{buildroot}
 ccs_update_schema > /dev/null 2>&1 ||:
 
 %changelog
+* Sun Dec 16 2018 Joe Grund <jgrund@whamcloud.com> - 4.0.24-5
+- Set fence-agents-common to minimal working version.
+
 * Thu Dec 13 2018 Joe Grund <jgrund@whamcloud.com> - 4.0.24-4
 - Revert patch for newer fence-agents-all in EL 7.6.
 
