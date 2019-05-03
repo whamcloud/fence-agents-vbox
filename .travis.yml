@@ -17,18 +17,18 @@ jobs:
         - export CLONE_URL=https://github.com/whamcloud/fence-agents-vbox.git
         - export SPEC=fence-agents-vbox.spec
         - docker run -it -e OWNER="$OWNER" -e PROJECT="$PROJECT" -e PACKAGE="$PACKAGE" -e CLONE_URL="$CLONE_URL" -e SPEC="$SPEC" -e KEY="$encrypted_253525cedcf6_key" -e IV="$encrypted_253525cedcf6_iv" -v $(pwd):/build:rw imlteam/copr
-    - stage: deploy-copr
+    - stage: deploy-copr-r5.0
       name: "Copr deploy"
       script:
         - export OWNER=managerforlustre
-        - export PROJECT=manager-for-lustre
+        - export PROJECT=manager-for-lustre-5.0
         - export PACKAGE=fence-agents-vbox
         - export CLONE_URL=https://github.com/whamcloud/fence-agents-vbox.git
         - export SPEC=fence-agents-vbox.spec
-        - docker run -it -e OWNER="$OWNER" -e PROJECT="$PROJECT" -e PACKAGE="$PACKAGE" -e CLONE_URL="$CLONE_URL" -e SPEC="$SPEC" -e KEY="$encrypted_253525cedcf6_key" -e IV="$encrypted_253525cedcf6_iv" -v $(pwd):/build:rw imlteam/copr
+        - docker run -it -e OWNER="$OWNER" -e PROJECT="$PROJECT" -e PACKAGE="$PACKAGE" -e CLONE_URL="$CLONE_URL" -e SPEC="$SPEC" -e PROD=true -e KEY="$encrypted_253525cedcf6_key" -e IV="$encrypted_253525cedcf6_iv" -v $(pwd):/build:rw imlteam/copr
 stages:
   - test
   - name: cd
     if: branch = master AND type = push AND fork = false
-  - name: deploy-copr
-    if: branch =~ ^v\d+\.\d+\.\d+-.+$
+  - name: deploy-copr-r5.0
+    if: branch =~ ^v\d+\.\d+\.\d+-.+-r5\.0$
